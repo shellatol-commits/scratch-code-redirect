@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratchblocks Router</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #111; color: #eee; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+        .box { background: #222; padding: 30px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); max-width: 400px; width: 90%; }
+        h1 { font-size: 1.5rem; color: #ffab19; margin-top: 0; }
+        p { color: #aaa; font-size: 0.95rem; }
+        .btn { display: inline-block; background: #4c97ff; color: white; border: none; padding: 12px 20px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; text-decoration: none; margin: 8px 4px; transition: background 0.2s; }
+        .btn:hover { background: #3373cc; }
+        .btn-copy { background: #42b983; }
+        .btn-copy:hover { background: #329468; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1 id="status">Loadin code...</h1>
+    <p id="msg">Preparing your Scratchblocks redirect.</p>
+    <div id="actions" style="display: none;">
+        <button class="btn btn-copy" onclick="copyToClipboard()">Copy Text Code</button>
+        <a id="redir-link" class="btn" href="#">Go Now</a>
+    </div>
+</div>
+
+<script>
+// BASE DE DADOS DOS TEUS SCRIPTS (Podes adicionar quantos quiseres aqui!)
+const scripts = {
+    // O teu script atual (será o padrão se alguém aceder ao link principal)
+    "default": {
+        text: "define wake up\n\\+ | install OFFICIAL Scratch extension [Advanced v] if not already installed::extension\n🛠️ | custom code snippet [execute unless ext custom:moreopers run scratch start ext title \"More Operators\", id \"moreopers\", code \"newbtn text \"Remove Extension\", action \"ext.remove(\"moreopers\")\"; newblock boolean operators, dropdown [\"true\",\"false\"\\].\", icon \"+(oper)\"]::#ff00ff\nset [sleeping v] to <+\\(oper\\) | [false v]::operators>\nplay sound (waking up v) until done\n\ndefine get dressed\nequip armor pieces: head: [leather_helmet\\[dyes={a:yellow}\\]] chest: [leather_chestplate\\[dyes={a:yellow}\\]] legs: [leather_leggings\\[dyes={a:yellow}\\]] feet: [leather_boots\\[dyes={a:yellow}\\]] :: looks\n\ndefine encode binary text [plain text] and save to [var]\n\\+ | install OFFICIAL Scratch extension [Advanced v] if not already installed::extension\n🛠️ | custom code snippet [execute unless ext scratch:binary run scratch install binary]::#ff00ff\n01 | encode text (plain text) into binary::#d015ae\n🛠️ | custom code snippet [execute unless ext scratch:adv.vars run scratch install adv.vars]::#ff00ff\n🛠️ (x::variables) | set (var) to (01 | encoded text::#d015ae) :: #a5f010\n\n\nwhen green flag clicked\nif <<(username)=[lnecel]>or<(username)=[LnecelAlt]>> then\nstart @greenFlag :: custom\nelse\ndecode results\nend\ndefine start @greenFlag\nwake up\nget dressed\encode binary text [time to play minecraft] and save to (encoded::custom)\nset [☁️ Transfer Message v] to (encoded::custom)\n\ndefine decode results\n\\+ | install OFFICIAL Scratch extension [Advanced v] if not already installed::extension\n🛠️ | custom code snippet [execute unless ext scratch:binary run scratch install binary]::#ff00ff\n01 | decode binary text (☁️ Transfer Message)::#d015ae\nsay (01 | decoded text::#d015ae)",
+        url: "https://scratchblocks.github.io/#?style=scratch3&script=define%20wake%20up%0A%5C%2B%20%7C%20install%20OFFICIAL%20Scratch%20extension%20%5BAdvanced%20v%5D%20if%20not%20already%20installed%3A%3Aextension%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20custom%3Amoreopers%20run%20scratch%20start%20ext%20title%20%22More%20Operators%22%2C%20id%20%22moreopers%22%2C%20code%20%22newbtn%20text%20%22Remove%20Extension%22%2C%20action%20%22ext.remove(%22moreopers%22)%22%3B%20newblock%20boolean%20operators%2C%20dropdown%20%5B%22true%22%2C%22false%22%5C%5D.%22%2C%20icon%20%22%2B(oper)%22%5D%3A%3A%23ff00ff%0Aset%20%5Bsleeping%20v%5D%20to%20%3C%2B%5C(oper%5C)%20%7C%20%5Bfalse%20v%5D%3A%3Aoperators%3E%0Aplay%20sound%20(waking%20up%20v)%20until%20done%0A%0Adefine%20get%20dressed%0Aequip%20armor%20pieces%3A%20head%3A%20%5Bleather_helmet%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20chest%3A%20%5Bleather_chestplate%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20legs%3A%20%5Bleather_leggings%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20feet%3A%20%5Bleather_boots%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20%3A%3A%20looks%0A%0Adefine%20encode%20binary%20text%20%5Bplain%20text%5D%20and%20save%20to%20%5Bvar%5D%0A%5C%2B%20%7C%20install%20OFFICIAL%20Scratch%20extension%20%5BAdvanced%20v%5D%20if%20not%20already%20installed%3A%3Aextension%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20scratch%3Abinary%20run%20scratch%20install%20binary%5D%3A%3A%23ff00ff%0A01%20%7C%20encode%20text%20(plain%20text)%20into%20binary%3A%3A%23d015ae%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20scratch%3Aadv.vars%20run%20scratch%20install%20adv.vars%5D%3A%3A%23ff00ff%0A%E2%9A%92%EF%B8%8F%20(x%3A%3Avariables)%20%7C%20set%20(var)%20to%20(01%20%7C%20encoded%20text%3A%3A%23d015ae)%20%3A%3A%20%23a5f010%0A%0A%0Awhen%20green%20flag%20clicked%0Aif%20%3C%3C(username)%3D%5Blnecel%5D%3Eor%3C(username)%3D%5BLnecelAlt%5D%3E%3E%20then%0Astart%20%40greenFlag%20%3A%3A%20custom%0Aelse%0Adecode%20results%0Aend%0Adefine%20start%20%40greenFlag%0Awake%20up%0Aget%20dressed%0Aencode%20binary%20text%20%5Btime%20to%20play%20minecraft%5D%20and%20save%20to%20(encoded%3A%3Acustom)%0Aset%20%5B%E2%98%81%EF%B8%8F%20Transfer%20Message%20v%5D%20to%20(encoded%3A%3Acustom)%0A%0Adefine%20decode%20results%0A%5C%2B%20%7C%20install%20OFFICIAL%20Scratch%20extension%20%5BAdvanced%20v%5D%20if%20not%20already%20installed%3A%3Aextension%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20scratch%3Abinary%20run%20scratch%20install%20binary%5D%3A%3A%23ff00ff%0A01%20%7C%20decode%20binary%20text%20(%E2%98%81%EF%B8%8F%20Transfer%20Message)%3A%3A%23d015ae%0Asay%20(01%20%7C%20decoded%20text%3A%3A%23d015ae)"
+    },
+    // Exemplo de um segundo script futuro
+    "script2": {
+        text: "when green flag clicked\nsay [Hello from script 2!] for (2) secs",
+        url: "https://scratchblocks.github.io/#?style=scratch3&script=define%20wake%20up%0A%5C%2B%20%7C%20install%20OFFICIAL%20Scratch%20extension%20%5BAdvanced%20v%5D%20if%20not%20already%20installed%3A%3Aextension%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20custom%3Amoreopers%20run%20scratch%20start%20ext%20title%20%22More%20Operators%22%2C%20id%20%22moreopers%22%2C%20code%20%22newbtn%20text%20%22Remove%20Extension%22%2C%20action%20%22ext.remove(%22moreopers%22)%22%3B%20newblock%20boolean%20operators%2C%20dropdown%20%5B%22true%22%2C%22false%22%5C%5D.%22%2C%20icon%20%22%2B(oper)%22%5D%3A%3A%23ff00ff%0Aset%20%5Bsleeping%20v%5D%20to%20%3C%2B%5C(oper%5C)%20%7C%20%5Bfalse%20v%5D%3A%3Aoperators%3E%0Aplay%20sound%20(waking%20up%20v)%20until%20done%0A%0Adefine%20get%20dressed%0Aequip%20armor%20pieces%3A%20head%3A%20%5Bleather_helmet%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20chest%3A%20%5Bleather_chestplate%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20legs%3A%20%5Bleather_leggings%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20feet%3A%20%5Bleather_boots%5C%5Bdyes%3D%7Ba%3Ayellow%7D%5C%5D%5D%20%3A%3A%20looks%0A%0Adefine%20encode%20binary%20text%20%5Bplain%20text%5D%20and%20save%20to%20%5Bvar%5D%0A%5C%2B%20%7C%20install%20OFFICIAL%20Scratch%20extension%20%5BAdvanced%20v%5D%20if%20not%20already%20installed%3A%3Aextension%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20scratch%3Abinary%20run%20scratch%20install%20binary%5D%3A%3A%23ff00ff%0A01%20%7C%20encode%20text%20(plain%20text)%20into%20binary%3A%3A%23d015ae%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20scratch%3Aadv.vars%20run%20scratch%20install%20adv.vars%5D%3A%3A%23ff00ff%0A%E2%9A%92%EF%B8%8F%20(x%3A%3Avariables)%20%7C%20set%20(var)%20to%20(01%20%7C%20encoded%20text%3A%3A%23d015ae)%20%3A%3A%20%23a5f010%0A%0A%0Awhen%20green%20flag%20clicked%0Aif%20%3C%3C(username)%3D%5Blnecel%5D%3Eor%3C(username)%3D%5BLnecelAlt%5D%3E%3E%20then%0Astart%20%40greenFlag%20%3A%3A%20custom%0Aelse%0Adecode%20results%0Aend%0Adefine%20start%20%40greenFlag%0Awake%20up%0Aget%20dressed%0Aencode%20binary%20text%20%5Btime%20to%20play%20minecraft%5D%20and%20save%20to%20(encoded%3A%3Acustom)%0Aset%20%5B%E2%98%81%EF%B8%8F%20Transfer%20Message%20v%5D%20to%20(encoded%3A%3Acustom)%0A%0Adefine%20decode%20results%0A%5C%2B%20%7C%20install%20OFFICIAL%20Scratch%20extension%20%5BAdvanced%20v%5D%20if%20not%20already%20installed%3A%3Aextension%0A%E2%9A%92%EF%B8%8F%20%7C%20custom%20code%20snippet%20%5Bexecute%20unless%20ext%20scratch%3Abinary%20run%20scratch%20install%20binary%5D%3A%3A%23ff00ff%0A01%20%7C%20decode%20binary%20text%20(%E2%98%81%EF%B8%8F%20Transfer%20Message)%3A%3A%23d015ae%0Asay%20(01%20%7C%20decoded%20text%3A%3A%23d015ae)"
+    }
+};
+
+// Descobrir qual o script solicitado usando a Query String (?s=nome)
+const urlParams = new URLSearchParams(window.location.search);
+const scriptKey = urlParams.get('s') || 'default';
+const currentScript = scripts[scriptKey] || scripts['default'];
+
+// Atualizar a interface gráfica
+document.getElementById('status').innerText = "Script Done!";
+document.getElementById('msg').innerText = `Estás a ver o script: "${scriptKey}". Escolhe uma opção abaixo ou aguarda o redirecionamento automático (3 segundos).`;
+document.getElementById('redir-link').href = currentScript.url;
+document.getElementById('actions').style.display = 'block';
+
+// Função para copiar o texto bruto
+function copyToClipboard() {
+    navigator.clipboard.writeText(currentScript.text);
+    alert("Code copied to clipboard!");
+}
+
+// Redirecionamento automático após 3 segundos
+setTimeout(() => {
+    window.location.href = currentScript.url;
+}, 3000);
+</script>
+
+</body>
+</html>
