@@ -18,7 +18,7 @@
 <body>
 
 <div class="box">
-    <h1 id="status">Loadin code...</h1>
+    <h1 id="status">Loading code...</h1>
     <p id="msg">Preparing your Scratchblocks redirect.</p>
     <div id="actions" style="display: none;">
         <button class="btn btn-copy" onclick="copyToClipboard()">Copy Text Code</button>
@@ -48,7 +48,7 @@ const currentScript = scripts[scriptKey] || scripts['default'];
 
 // Atualizar a interface gráfica
 document.getElementById('status').innerText = "Script Done!";
-document.getElementById('msg').innerText = `Estás a ver o script: "${scriptKey}". Escolhe uma opção abaixo ou aguarda o redirecionamento automático (3 segundos).`;
+document.getElementById('msg').innerText = `You are seeing the script: "${scriptKey}". Choose an option below or wait for automatic redirection (3 seconds).`;
 document.getElementById('redir-link').href = currentScript.url;
 document.getElementById('actions').style.display = 'block';
 
